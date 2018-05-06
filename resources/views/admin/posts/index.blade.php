@@ -1,0 +1,1 @@
+Mostrar todos os posts.
