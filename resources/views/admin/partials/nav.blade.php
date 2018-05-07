@@ -9,7 +9,7 @@
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-eye"></i>Ver Posts</a></li>
+            <li><a href="{{route('admin.posts.index')}}"><i class="fa fa-eye"></i>Ver Posts</a></li>
             <li><a href="#"><i class="fa fa-pencil">Criar Post</a></li>
           </ul>
         </li>
