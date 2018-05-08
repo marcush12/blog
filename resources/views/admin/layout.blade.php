@@ -9,8 +9,10 @@
   <link rel="stylesheet" href="/adminlte/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="/adminlte/font-awesome/css/font-awesome.min.css">
+
+  @stack('styles')
   <!-- Theme style -->
-  <link rel="stylesheet" href="/adminlte/css//adminlte.min.css">
+  <link rel="stylesheet" href="/adminlte/css/adminlte.min.css">
   <!-- /adminlte Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
@@ -259,13 +261,15 @@ desired effect
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
+    <section class="content-header ">
       @yield('header')
     </section>
 
     <!-- Main content -->
     <section class="content container-fluid">
-
+        @if (session()->has('flash'))
+          <div class="alert alert-success">{{ session('flash') }}</div>
+        @endif
         @yield('content')
 
 
@@ -275,14 +279,14 @@ desired effect
   <!-- /.content-wrapper -->
 
   <!-- Main Footer -->
-  <footer class="main-footer">
+  {{-- <footer class="main-footer">
     <!-- To the right -->
     <div class="pull-right hidden-xs">
       Anything you want
     </div>
     <!-- Default to the left -->
     <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
-  </footer>
+  </footer> --}}
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -369,8 +373,12 @@ desired effect
 <script src="/adminlte/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="/adminlte/bootstrap/js/bootstrap.min.js"></script>
+
+
+ @stack('scripts')
 <!-- /adminlte App -->
-<script src="/adminlte/js/adminlte.min.js"></script>
+<script src="/adminlte/js/app.min.js"></script>
+
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the

@@ -21,11 +21,15 @@ Route::group([
     'namespace'=>'Admin',
     'middleware'=>'auth'],
     function () {
+        Route::get('/', 'AdminController@index')->name('dashboard');
         Route::get('posts', 'PostsController@index')->name('admin.posts.index');
+        Route::get('posts/create', 'PostsController@create')->name('admin.posts.create');
+        Route::post('posts', 'PostsController@store')->name('admin.posts.store');
+
     //rotas de admin
     }
 );
-Route::get('home', 'HomeController@index');
+
 
 // Authentication Routes...
         Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
