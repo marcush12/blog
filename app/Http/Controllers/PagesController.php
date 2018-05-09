@@ -9,7 +9,11 @@ class PagesController extends Controller
 {
     public function home()
     {
-        $posts = Post::latest('published_at')->get();//a partir do último post para baixo
+        // $posts = Post::whereNotNull('published_at')//exceto os com data nula
+        //                 ->where('published_at', '<=', Carbon::now())
+        //                 ->latest('published_at')
+        //                 ->get();//a partir do último post para baixo
+        $posts = Post::published()->get();
         return view('welcome', compact('posts'));
     }
 }

@@ -32,6 +32,7 @@ class PostsTableSeeder extends Seeder
 
         $post = new Post;
         $post->title = "My first BJ";
+        $post->url = str_slug("My first BJ");
         $post->excerpt = 'It was a beautiful afternoon and then';
         $post->body = "<p>Lorem ipsum turpis praesent scelerisque sed mollis, suspendisse inceptos ullamcorper amet nullam, neque per cras at porttitor</p>";
         $post->published_at = Carbon::now();
@@ -40,6 +41,7 @@ class PostsTableSeeder extends Seeder
 
         $post = new Post;
         $post->title = "My first Swallow";
+        $post->url = str_slug("My first Swallow");
         $post->excerpt = 'Suddenly he came and took me by surprise';
         $post->body = "<p>Lorem ipsum turpis praesent scelerisque sed mollis, suspendisse inceptos ullamcorper amet nullam, neque per cras at porttitor</p>";
         $post->published_at = Carbon::now();
@@ -48,6 +50,7 @@ class PostsTableSeeder extends Seeder
 
         $post = new Post;
         $post->title = "My first DT";
+        $post->url = str_slug("My first DT");
         $post->excerpt = 'I put it all in mouth';
         $post->body = "<p>Lorem ipsum turpis praesent scelerisque sed mollis, suspendisse inceptos ullamcorper amet nullam, neque per cras at porttitor</p>";
         $post->published_at = Carbon::now();
