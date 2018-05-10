@@ -60,7 +60,7 @@ class PostsController extends Controller
         $post->save();
 
         $post->tags()->attach($request->get('tags'));
-        return back()->with('flash', 'Seu Post foi atualizado com sucesso!');
+        return redirect()->route('admin.posts.edit', $post)->with('flash', 'Seu Post foi atualizado com sucesso!');
 
     // }
     }

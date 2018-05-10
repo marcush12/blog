@@ -10,7 +10,7 @@
         <div class="modal-body">
           <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
             {{-- <label for="">Título do Post</label> --}}
-            <input name='title' type="text" class="form-control" value="{{old('title')}}" placeholder="título do post">
+            <input name='title' type="text" class="form-control" value="{{old('title')}}" placeholder="título do post" required>
             {!!$errors->first('title','<span class="help-block">:message</span>' )!!}
           </div>
         </div>
