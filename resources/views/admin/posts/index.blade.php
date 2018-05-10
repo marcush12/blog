@@ -10,9 +10,10 @@
       </ol>
 @endsection
 @section('content')
-    <div class="box">
+    <div class="box box-primary">
         <div class="box-header">
             <h3 class="box-title">Lista das publicações</h3>
+            <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Criar Post</button>
         </div>
         <div class="box-body">
               <table id="posts-table" class="table table-bordered table-striped">
@@ -59,6 +60,7 @@
     });
   });
 </script>
-    </script>
+<!-- Modal -->
+
 @endpush
 
