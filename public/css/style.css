@@ -290,6 +290,13 @@ a.btn-bar{
         font-size: 30px;
         background-color: rgba(0,0,0, .7);
       }
+      .gallery-photos {
+        overflow: hidden;
+
+      }
+      .carousel-inner .item img {
+        width:100%;
+      }
 
 
 

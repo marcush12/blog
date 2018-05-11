@@ -22,4 +22,11 @@ class PhotosController extends Controller
             'post_id'=>$post->id
         ]);
     }
+    public function destroy(Photo $photo)
+    {
+        $photo->delete();
+        $photoPath = str_replace('storage', 'public', $photo->url);
+        Storage::delete($photoPath);
+        return back()->with('flash', 'Foto deletada!');
+    }
 }
