@@ -4,6 +4,7 @@ namespace App;
 
 //use App\Category; //não precisa porque estão na mesma pasta
 use App\Tag;
+use App\Photo;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,6 +24,10 @@ class Post extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
+    }
+    public function photos()
+    {
+        return $this->hasMany(Photo::class);
     }
     public function scopePublished($query)//query builder
     {
