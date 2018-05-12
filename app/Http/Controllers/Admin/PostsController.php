@@ -8,6 +8,7 @@ use App\Category;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StorePostRequest;
 
 class PostsController extends Controller
 {
@@ -34,29 +35,32 @@ class PostsController extends Controller
         $tags = Tag::all();
         return view('admin.posts.edit', compact('categories', 'tags', 'post'));
     }
-    public function update(Post $post, Request $request)
+    public function update(Post $post, StorePostRequest $request)
     {
 
-        //validação
-        $this->validate($request, [
-            'title'=>'required',
-            'body'=>'required',
-            'category'=>'required',
-            'excerpt'=>'required'
-        ]);
+        //validação// foi feita com php artisan make:request StorePostRequest
+        // $this->validate($request, [
+        //     'title'=>'required',
+        //     'body'=>'required',
+        //     'category'=>'required',
+        //     'excerpt'=>'required'
+        // ]);
         //return Post::create($request->all());
         //return $request->all();
         //$post = new Post;//já está como parâmetro
-        $post->title = $request->get('title');
-        $post->body = $request->get('body');
-        $post->iframe = $request->get('iframe');
-        $post->excerpt = $request->get('excerpt');
-        $post->published_at = $request->has('published_at') ? Carbon::parse($request->get('published_at')) : null;
-        $post->category_id = $request->get('category');//only category at last
+        // $post->title = $request->get('title');
+        // $post->body = $request->get('body');
+        // $post->iframe = $request->get('iframe');
+        // $post->excerpt = $request->get('excerpt');
+        // $post->published_at = $request->get('published_at');
+        // $post->category_id = $request->get('category_id');
+        // $post->save();
 
-        $post->save();
+        $post->update($request->all());
 
-        $post->tags()->attach($request->get('tags'));
+
+        $post->syncTags($request->get('tags'));
+
         return redirect()->route('admin.posts.edit', $post)->with('flash', 'Seu Post foi atualizado com sucesso!');
 
     // }
