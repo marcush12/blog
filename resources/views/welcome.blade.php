@@ -1,7 +1,9 @@
 @extends('layout')
 @section('content')
-
     <section class="posts container">
+        @if(isset($title))
+            <h3>{{ $title }}</h3>
+        @endif
         @foreach($posts as $post)
         <article class="post">
             @if($post->photos->count() ===1)
@@ -18,6 +20,10 @@
                         </figure>
                     @endforeach
                 </div>
+            @elseif($post->iframe)
+                <div class="video">
+                    {!! $post->iframe !!}
+                </div>
             @endif
             <div class="content-post">
                 <header class="container-flex space-between">
@@ -26,7 +32,9 @@
                         {{-- outra opção para diff: format('M d') --}}
                     </div>
                     <div class="post-category">
-                        <span class="category text-capitalize">{{$post->category->name}}</span>
+                        <span class="category text-capitalize">
+                            <a href="{{ route('categories.show', $post->category) }}">{{$post->category->name}}</a>
+                        </span>
                     </div>
                 </header>
                 <h1>{{$post->title}}</h1>
@@ -38,7 +46,7 @@
                     </div>
                     <div class="tags container-flex">
                         @foreach($post->tags as $tag)
-                        <span class="tag c-gray-1 text-capitalize">#{{$tag->name}}</span>
+                        <span class="tag c-gray-1 text-capitalize"><a href="{{route('tags.show', $tag)}}">#{{$tag->name}}</a></span>
                         @endforeach
                     </div>
                 </footer>
@@ -245,14 +253,14 @@
         </article> --}}
 
     </section><!-- fin del div.posts.container -->
-
-    <div class="pagination">
+    {{$posts->links()}}
+    {{-- <div class="pagination">
         <ul class="list-unstyled container-flex space-center">
             <li><a href="#" class="pagination-active">1</a></li>
             <li><a href="#">2</a></li>
             <li><a href="#">3</a></li>
         </ul>
-    </div>
+    </div> --}}
 @stop
 
 

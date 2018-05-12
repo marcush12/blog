@@ -25,10 +25,7 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, ['title'=>'required']);
-        $post = Post::create([
-            'title'=>$request->get('title'),
-            'url'=>str_slug($request->get('title')),
-        ]);
+        $post = Post::create($request->only('title'));
         return redirect()->route('admin.posts.edit', $post);
     }
     public function edit(Post $post)
@@ -51,8 +48,8 @@ class PostsController extends Controller
         //return $request->all();
         //$post = new Post;//já está como parâmetro
         $post->title = $request->get('title');
-        $post->url = str_slug($request->get('title'));
         $post->body = $request->get('body');
+        $post->iframe = $request->get('iframe');
         $post->excerpt = $request->get('excerpt');
         $post->published_at = $request->has('published_at') ? Carbon::parse($request->get('published_at')) : null;
         $post->category_id = $request->get('category');//only category at last
@@ -64,5 +61,4 @@ class PostsController extends Controller
 
     // }
     }
-
 }

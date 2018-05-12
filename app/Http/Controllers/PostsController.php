@@ -12,4 +12,5 @@ class PostsController extends Controller
         //$post = Post::findOrFail($id);//binding Post $post; we dont need the line anymore
         return view('posts.show', compact('post'));
     }
+
 }

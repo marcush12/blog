@@ -13,7 +13,7 @@ class PagesController extends Controller
         //                 ->where('published_at', '<=', Carbon::now())
         //                 ->latest('published_at')
         //                 ->get();//a partir do último post para baixo
-        $posts = Post::published()->get();
+        $posts = Post::published()->paginate(2);//default=15
         return view('welcome', compact('posts'));
     }
 }
