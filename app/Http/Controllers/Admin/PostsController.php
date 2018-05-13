@@ -25,7 +25,7 @@ class PostsController extends Controller
     // }
     public function store(Request $request)
     {
-        $this->validate($request, ['title'=>'required']);
+        $this->validate($request, ['title'=>'required|min:3']);
         $post = Post::create($request->only('title'));
         return redirect()->route('admin.posts.edit', $post);
     }
@@ -61,8 +61,16 @@ class PostsController extends Controller
 
         $post->syncTags($request->get('tags'));
 
-        return redirect()->route('admin.posts.edit', $post)->with('flash', 'Seu Post foi atualizado com sucesso!');
+        return redirect()->route('admin.posts.edit', $post)
+                         ->with('flash', 'Seu Post foi atualizado com sucesso!');
 
     // }
+    }
+    public function destroy(Post $post)
+    {
+        $post->tags()->detach(); //vai eliminar todas as referências a tags do post
+        $post->photos->each->delete();
+        $post->delete();
+        return redirect()->route('admin.posts.index')->with('flash', 'Seu Post foi eliminado com sucesso!');
     }
 }

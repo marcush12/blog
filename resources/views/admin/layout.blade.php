@@ -373,12 +373,15 @@ desired effect
 <script src="/adminlte/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="/adminlte/bootstrap/js/bootstrap.min.js"></script>
-
-
- @stack('scripts')
+@unless(request()->is('admin/posts/*'))
+  @include('admin.posts.create')
+@endunless
+@stack('scripts')
 <!-- /adminlte App -->
 <script src="/adminlte/js/app.min.js"></script>
 
-@include('admin.posts.create')
+
+{{-- unless: a menos a estejamos editando em admin/post/* qualquer não executar abaixo --}}
+
 </body>
 </html>

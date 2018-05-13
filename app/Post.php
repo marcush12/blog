@@ -37,11 +37,16 @@ class Post extends Model
                         ->where('published_at', '<=', Carbon::now())
                         ->latest('published_at');
     }
-    public function setTitleAttribute($title)
-    {
-        $this->attributes['title'] = $title;
-        $this->attributes['url'] = str_slug($title);
-    }
+    // public function setTitleAttribute($title)
+    // {
+    //     $this->attributes['title'] = $title;
+    //     $originalUrl = $url = str_slug($title);
+    //     $count = 1;
+    //     while (Post::where('url', $url)->exists()) {
+    //         $url = "{$originalUrl}-" . ++$count;
+    //     }
+    //     $this->attributes['url'] = $url;
+    // }
     public function setPublishedAtAttribute($published_at)//mutator
     {
         $this->attributes['published_at'] = $published_at ? Carbon::parse($published_at) : null;
@@ -58,5 +63,20 @@ class Post extends Model
             return Tag::find($tag) ? $tag : Tag::create(['name'=>$tag])->id;
         });
         return $this->tags()->sync($tagIds);
+    }
+    public static function create(array $attributes = [])
+    {
+        $post = static::query()->create($attributes);
+        $post->generateUrl();
+        return $post;
+    }
+    public function generateUrl()
+    {
+        $url = str_slug($this->title);
+        if ($this->where($url)->exists()) {
+            $url = "{$url}-{$this->id}";
+        }
+        $this->url = $url;
+        $this->save();
     }
 }
