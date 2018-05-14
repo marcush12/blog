@@ -33,7 +33,7 @@
     });
     $('#myModal').on('shown.bs.modal', function(){//shown after show modal
       $('#post-title').focus();
-      window.location.hash === '#create';
+      window.location.hash = '#create';
     });
   </script>
 @endpush

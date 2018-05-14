@@ -14,7 +14,7 @@ class PostsController extends Controller
 {
     public function index()
     {
-        $posts = Post::all();
+        $posts = auth()->user()->posts;//poderia ser Post::where('user_id', auth()->id())->get();
         return view('admin.posts.index', compact('posts'));
     }
     // public function create()
@@ -25,15 +25,20 @@ class PostsController extends Controller
     // }
     public function store(Request $request)
     {
+        $this->authorize('create', new Post);
         $this->validate($request, ['title'=>'required|min:3']);
-        $post = Post::create($request->only('title'));
+        //$post = Post::create($request->only('title'));
+        $post = Post::create($request->all());
         return redirect()->route('admin.posts.edit', $post);
     }
     public function edit(Post $post)
     {
-        $categories = Category::all();
-        $tags = Tag::all();
-        return view('admin.posts.edit', compact('categories', 'tags', 'post'));
+        $this->authorize('view', $post);//view method in PostPolicy//pedimos autorização para ver este post
+        return view('admin.posts.edit', [
+            'categories' =>Category::all(),
+            'tags'=>Tag::all(),
+            'post'=>$post
+        ]);
     }
     public function update(Post $post, StorePostRequest $request)
     {
@@ -55,7 +60,7 @@ class PostsController extends Controller
         // $post->published_at = $request->get('published_at');
         // $post->category_id = $request->get('category_id');
         // $post->save();
-
+        $this->authorize('update', $post);
         $post->update($request->all());
 
 
@@ -68,6 +73,7 @@ class PostsController extends Controller
     }
     public function destroy(Post $post)
     {
+        $this->authorize('delete', $post);
         $post->tags()->detach(); //vai eliminar todas as referências a tags do post
         $post->photos->each->delete();
         $post->delete();

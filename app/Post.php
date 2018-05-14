@@ -4,6 +4,7 @@ namespace App;
 
 //use App\Category; //não precisa porque estão na mesma pasta
 use App\Tag;
+use App\User;
 use App\Photo;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     protected $fillable = [
-        'title', 'body', 'iframe', 'excerpt', 'published_at', 'category_id'
+        'title', 'body', 'iframe', 'excerpt', 'published_at', 'category_id', 'user_id'
     ];
     protected $dates = ['published_at'];
 
@@ -31,11 +32,19 @@ class Post extends Model
     {
         return $this->hasMany(Photo::class);
     }
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
     public function scopePublished($query)//query builder
     {
         $query->whereNotNull('published_at')//exceto os com data nula
                         ->where('published_at', '<=', Carbon::now())
                         ->latest('published_at');
+    }
+    public function isPublished()
+    {
+        return ! is_null($this->published_at) && $this->published_at < today();
     }
     // public function setTitleAttribute($title)
     // {
@@ -66,6 +75,7 @@ class Post extends Model
     }
     public static function create(array $attributes = [])
     {
+        $attributes['user_id'] = auth()->id();
         $post = static::query()->create($attributes);
         $post->generateUrl();
         return $post;
@@ -73,7 +83,7 @@ class Post extends Model
     public function generateUrl()
     {
         $url = str_slug($this->title);
-        if ($this->where($url)->exists()) {
+        if ($this->where('url', $url)->exists()) {//poderia ser whereUrl($url)
             $url = "{$url}-{$this->id}";
         }
         $this->url = $url;

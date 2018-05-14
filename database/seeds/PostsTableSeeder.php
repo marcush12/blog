@@ -35,12 +35,13 @@ class PostsTableSeeder extends Seeder
 
 
         $post = new Post;
-        $post->title = "My first BJ";
-        $post->url = str_slug("My first BJ");
+        $post->title = "My first money";
+        $post->url = str_slug("My first money");
         $post->excerpt = 'It was a beautiful afternoon and then';
         $post->body = "<p>Lorem ipsum turpis praesent scelerisque sed mollis, suspendisse inceptos ullamcorper amet nullam, neque per cras at porttitor</p>";
         $post->published_at = Carbon::now();
         $post->category_id = 1;
+        $post->user_id = 1;
         $post->save();
         $post->tags()->attach(Tag::create(['name'=>'tag1']));
 
@@ -51,6 +52,7 @@ class PostsTableSeeder extends Seeder
         $post->body = "<p>Lorem ipsum turpis praesent scelerisque sed mollis, suspendisse inceptos ullamcorper amet nullam, neque per cras at porttitor</p>";
         $post->published_at = Carbon::now();
         $post->category_id = 2;
+        $post->user_id = 1;
         $post->save();
         $post->tags()->attach(Tag::create(['name'=>'tag2']));
 
@@ -61,6 +63,7 @@ class PostsTableSeeder extends Seeder
         $post->body = "<p>Lorem ipsum turpis praesent scelerisque sed mollis, suspendisse inceptos ullamcorper amet nullam, neque per cras at porttitor</p>";
         $post->published_at = Carbon::now();
         $post->category_id = 3;
+        $post->user_id = 2;
         $post->save();
         $post->tags()->attach(Tag::create(['name'=>'tag3']));
     }
