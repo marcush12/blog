@@ -39,7 +39,8 @@ Route::group([
         // Route::delete('posts/{post}', 'PostsController@destroy')->name('admin.posts.destroy');
 
         Route::resource('users', 'UsersController', ['as'=>'admin']);
-
+        Route::put('users/{user}/roles', 'UsersRolesController@update')->name('admin.users.roles.update');
+        Route::put('users/{user}/permissions', 'UsersPermissionsController@update')->name('admin.users.permissions.update');
         Route::post('posts/{post}/photos', 'PhotosController@store')->name('admin.posts.photos.store');
         Route::delete('photos/{photo}', 'PhotosController@destroy')->name('admin.photos.destroy');
 
