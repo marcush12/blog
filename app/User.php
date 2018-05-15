@@ -28,6 +28,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    public function setPasswordAttribute($password)//mutator
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
     public function posts()
     {
         return $this->hasMany(Post::class);

@@ -65,7 +65,8 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            //'password' => bcrypt($data['password']),tem tirar bcrypt pq estamos colocando em outro lugar: recuperar senha; teríamos duas vezes!!
+            'password' => $data['password']
         ]);
     }
 }
