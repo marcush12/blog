@@ -14,7 +14,13 @@ class PostsController extends Controller
 {
     public function index()
     {
-        $posts = auth()->user()->posts;//poderia ser Post::where('user_id', auth()->id())->get();
+        //$posts = auth()->user()->posts;//poderia ser Post::where('user_id', auth()->id())->get();
+        // if (auth()->user()->hasRole('Admin')) {
+        //     $posts = Post::all();
+        // } else {
+        //     $posts = auth()->user()->posts;
+        // }
+        $posts = Post::allowed()->get();//substitui o if acima! ele foi para scopeAllowed() em Post.php
         return view('admin.posts.index', compact('posts'));
     }
     // public function create()

@@ -17,6 +17,13 @@ class PostPolicy
      * @param  \App\Post  $post
      * @return mixed
      */
+    public function before($user)//executado antes de qq outro método aqui
+    {
+        if ($user->hasRole('Admin')) {
+            return true;//admin poderá realizar qq ação
+        }
+    }
+
     public function view(User $user, Post $post)
     {
         return $user->id === $post->user_id;//true or false

@@ -11,7 +11,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');//desabilitando check da foreign key para não dar erro
+
         $this->call(UsersTableSeeder::class);
         $this->call(PostsTableSeeder::class);
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');//re-habilitando check da foreign key
     }
 }
