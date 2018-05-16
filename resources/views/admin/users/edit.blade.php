@@ -26,15 +26,7 @@
                             <label for="email">Email:</label>
                             <input type="text" name='email' value="{{ old('email', $user->email) }}" class="form-control">
                         </div>
-                        <div class="form-group">
-                            <label for="password">Senha:</label>
-                            <input type="password" name='password' class="form-control" placeholder="Senha">
-                            <span class="help-block">Deixe em branco para manter a senha atual.</span>
-                        </div>
-                        <div class="form-group">
-                            <label for="password_confirmation">Repita a Senha:</label>
-                            <input type="password" name='password_confirmation' class="form-control" placeholder="Repita a Senha">
-                        </div>
+
                         <button class="btn btn-primary btn-block">Atualizar usuário</button>
                     </form>
                 </div>
@@ -46,19 +38,21 @@
                     <h3 class="box-title">Papéis</h3>
                 </div>
                 <div class="box-body">
+                    @role('Admin')
                     <form action="{{ route('admin.users.roles.update', $user) }}" method="POST">
                         {{csrf_field()}} {{method_field('PUT')}}
-                        @foreach($roles as $id=>$name)
-                        <div class="checkbox">
-                            <label for="">
-                                <input name="roles[]" type="checkbox" value="{{ $name }}" {{$user->roles->contains($id) ? 'checked' : ''}} >
-                                {{ $name }}
-                            </label>
-                        </div>
-                        @endforeach
+                        @include('admin.roles.checkboxes')
                         <button class="btn btn-primary btn-block">Atualizar Papéis</button>
                     </form>
-
+                    @else
+                        <ul class="list-group">
+                            @forelse($user->roles as $role)
+                                <li class="list-group-item">{{ $role->name }}</li>
+                            @empty
+                                <li class="list-group-item">Não tem papéis</li>
+                            @endforelse
+                        </ul>
+                    @endrole
                 </div>
             </div>
             <div class="box box-primary">
@@ -66,19 +60,21 @@
                     <h3 class="box-title">Permissões</h3>
                 </div>
                 <div class="box-body">
+                    @role('Admin')
                     <form action="{{ route('admin.users.permissions.update', $user) }}" method="POST">
                         {{csrf_field()}} {{method_field('PUT')}}
-                        @foreach($permissions as $id=>$name)
-                        <div class="checkbox">
-                            <label for="">
-                                <input name="permissions[]" type="checkbox" value="{{ $name }}" {{$user->permissions->contains($id) ? 'checked' : ''}} >
-                                {{ $name }}
-                            </label>
-                        </div>
-                        @endforeach
+                        @include('admin.permissions.checkboxes')
                         <button class="btn btn-primary btn-block">Atualizar Permissões</button>
                     </form>
-
+                    @else
+                        <ul class="list-group">
+                            @forelse($user->permissions as $permission)
+                                <li class="list-group-item">{{ $permission->name }}</li>
+                            @empty
+                                <li class="list-group-item">Não tem permissões</li>
+                            @endforelse
+                        </ul>
+                    @endrole
                 </div>
             </div>
         </div>

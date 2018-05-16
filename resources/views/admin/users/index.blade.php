@@ -13,7 +13,7 @@
     <div class="box box-primary">
         <div class="box-header">
             <h3 class="box-title">Lista dos usuários</h3>
-            <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Criar Usuário</button>
+            <a href="{{ route('admin.users.create') }}"" class="btn btn-primary pull-right""><i class="fa fa-plus"></i> Criar Usuário</a>
         </div>
         <div class="box-body">
               <table id="posts-table" class="table table-bordered table-striped">
