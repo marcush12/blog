@@ -110,7 +110,7 @@ class UsersController extends Controller
     {
         $this->authorize('update', $user);
         $user->update($request->validated());//devolve somente os campos já validados
-        return back()->withFlash('Usuário atualizado');
+        return redirect()->route('admin.users.edit', $user)->withFlash('Usuário atualizado');
     }
 
     /**
@@ -119,8 +119,10 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $this->authorize('delete', $user);//pergunta se temos autorização p deletar
+        $user->delete();
+        return redirect()->route('admin.users.index')->withFlash('Usuário eliminado.');
     }
 }
