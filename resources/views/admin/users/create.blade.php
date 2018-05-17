@@ -25,7 +25,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="">Permissões</label>
-                            @include('admin.permissions.checkboxes')
+                            @include('admin.permissions.checkboxes', ['model'=>$user])
                         </div>
                         <span class="help-block">"A senha será gerada e enviada via email ao novo usuário."</span>
                         <button class="btn btn-primary btn-block">Criar usuário</button>
