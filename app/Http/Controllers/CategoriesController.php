@@ -12,7 +12,7 @@ class CategoriesController extends Controller
         $posts = $category->posts;
         return view('pages.home', [
             'title'=>"Posts com a categoria '$category->name'",//estamos no php apenas {}
-            'posts'=> $category->posts()->paginate(15)
+            'posts'=> $category->posts()->published()->paginate()
         ]);
     }
 }

@@ -16,6 +16,7 @@
 //     return new App\Mail\LoginCredentials(App\User::first(), 'asd123');
 // });
 
+
 Route::get('/', 'PagesController@home')->name('pages.home');
 Route::get('about', 'PagesController@about')->name('pages.about');
 Route::get('archive', 'PagesController@archive')->name('pages.archive');

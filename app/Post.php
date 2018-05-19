@@ -38,7 +38,8 @@ class Post extends Model
     }
     public function scopePublished($query)//query builder
     {
-        $query->whereNotNull('published_at')//exceto os com data nula
+        $query->with(['owner', 'category', 'tags', 'photos'])
+                        ->whereNotNull('published_at')//exceto os com data nula
                         ->where('published_at', '<=', Carbon::now())
                         ->latest('published_at');
     }
@@ -49,6 +50,16 @@ class Post extends Model
         }
         return $query->where('user_id', auth()->id());
     }
+    // public function scopeByYearAndMonth($query)//não funcionou!
+    // {
+    //    return $query->selectRaw('year(published_at)  year')//as year = alias
+    //          ->selectRaw('month(published_at)  month')
+    //          ->selectRaw('monthname(published_at)  monthname')
+    //          ->selectRaw('count(*) posts')
+    //          ->groupBy('year', 'month', 'monthname')
+    //          //->orderBy('published_at')//deu erro mas funcionou sem isso!
+    //          ->get();//Raw para year ou month
+    // }
     public function isPublished()
     {
         return ! is_null($this->published_at) && $this->published_at < today();

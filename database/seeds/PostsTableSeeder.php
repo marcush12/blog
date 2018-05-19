@@ -46,25 +46,49 @@ class PostsTableSeeder extends Seeder
         $post->tags()->attach(Tag::create(['name'=>'tag1']));
 
         $post = new Post;
-        $post->title = "My first Swallow";
-        $post->url = str_slug("My first Swallow");
+        $post->title = "My first coin";
+        $post->url = str_slug("My first coin");
         $post->excerpt = 'Suddenly he came and took me by surprise';
         $post->body = "<p>Lorem ipsum turpis praesent scelerisque sed mollis, suspendisse inceptos ullamcorper amet nullam, neque per cras at porttitor</p>";
         $post->published_at = Carbon::now();
         $post->category_id = 2;
         $post->user_id = 1;
         $post->save();
+
         $post->tags()->attach(Tag::create(['name'=>'tag2']));
 
         $post = new Post;
         $post->title = "My first DT";
         $post->url = str_slug("My first DT");
-        $post->excerpt = 'I put it all in mouth';
+        $post->excerpt = 'I put it all in ';
         $post->body = "<p>Lorem ipsum turpis praesent scelerisque sed mollis, suspendisse inceptos ullamcorper amet nullam, neque per cras at porttitor</p>";
         $post->published_at = Carbon::now();
         $post->category_id = 3;
         $post->user_id = 2;
         $post->save();
         $post->tags()->attach(Tag::create(['name'=>'tag3']));
+        $post->tags()->attach(Tag::create(['name'=>'tag2']));
+
+        $post = new Post;
+        $post->title = "My Post";
+        $post->url = str_slug("My Post");
+        $post->excerpt = 'I put it all in my pocket';
+        $post->body = "<p>Lorem ipsum turpis praesent scelerisque sed mollis, suspendisse inceptos ullamcorper amet nullam, neque per cras at porttitor</p>";
+        $post->published_at = Carbon::now();
+        $post->category_id = 3;
+        $post->user_id = 2;
+        $post->save();
+        $post->tags()->attach(Tag::create(['name'=>'tag1']));
+
+        $post = new Post;
+        $post->title = "Another Post";
+        $post->url = str_slug("Another Post");
+        $post->excerpt = 'I put it all in my pocket';
+        $post->body = "<p>Lorem ipsum turpis praesent scelerisque sed mollis, suspendisse inceptos ullamcorper amet nullam, neque per cras at porttitor</p>";
+        $post->published_at = Carbon::now();
+        $post->category_id = 3;
+        $post->user_id = 2;
+        $post->save();
+        $post->tags()->attach(Tag::create(['name'=>'tag2']));
     }
 }

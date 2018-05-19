@@ -11,7 +11,7 @@ class TagsController extends Controller
     {
         return view('pages.home', [
             'title'=>"Posts com a tag {$tag->name}",//apenas {} pq estamos no php
-            'posts'=> $tag->posts()->paginate(1)
+            'posts'=> $tag->posts()->published()->paginate(1)
         ]);
     }
 }
