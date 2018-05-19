@@ -13,7 +13,9 @@
     <div class="box box-primary">
         <div class="box-header">
             <h3 class="box-title">Lista dos usuários</h3>
-            <a href="{{ route('admin.users.create') }}"" class="btn btn-primary pull-right""><i class="fa fa-plus"></i> Criar Usuário</a>
+            @can('create', $users->first())
+              <a href="{{ route('admin.users.create') }}"" class="btn btn-primary pull-right""><i class="fa fa-plus"></i> Criar Usuário</a>
+            @endcan
         </div>
         <div class="box-body">
               <table id="posts-table" class="table table-bordered table-striped">
@@ -34,15 +36,20 @@
                             <td>{{$user->email}}</td>
                             <td>{{$user->getRoleNames()->implode(', ')}}</td>
                             <td>
-                                <a href="{{route('admin.users.show', $user)}}" class="btn btn-xs btn-default" target="_blank"><i class="fa fa-eye"></i></a>
+                              @can('view', $user)
+                                <a href="{{route('admin.users.edit', $user)}}" class="btn btn-xs btn-default" target="_blank"><i class="fa fa-eye"></i></a>
+                              @endcan
+                              @can('update', $user)
                                 <a href="{{route('admin.users.edit', $user)}}" class="btn btn-xs btn-info"><i class="fa fa-pencil"></i></a>
+                              @endcan
+                              @can('delete', $user)
                                 <form action="{{route('admin.users.destroy', $user)}}" method='POST' style='display:inline'>
                                   {{csrf_field()}} {{method_field('DELETE')}}
                                   <button class="btn btn-xs btn-danger"
                                     onclick="return confirm('Tem certeza que quer eliminar este usuário?')">
                                     <i class="fa fa-times"></i></button>
                                 </form>
-
+                              @endcan
                             </td>
                         </tr>
                     @endforeach

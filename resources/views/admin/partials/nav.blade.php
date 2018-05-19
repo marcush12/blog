@@ -11,17 +11,19 @@
               </span>
           </a>
           <ul class="treeview-menu">
-            <li class="{{ setActiveRoute('admin.posts.index') }}><a href="{{route('admin.posts.index')}}"><i class="fa fa-eye"></i>Ver Posts</a></li>
-            <li>
-              @if(request()->is('admin/posts/*'))
-                <a href="{{route('admin.posts.index', '#create')}}"><i class="fa fa-pencil"></i>Criar Post</a>
-              @else
-                <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil"></i>Criar Post</a>
-              @endif
-            </li>
+              <li class="{{ setActiveRoute('admin.posts.index') }}"><a href="{{route('admin.posts.index')}}"><i class="fa fa-eye"></i>Ver todos os Posts</a></li>
+            @can('create', new App\Post)
+              <li>
+                @if(request()->is('admin/posts/*'))
+                  <a href="{{route('admin.posts.index', '#create')}}"><i class="fa fa-pencil"></i>Criar Post</a>
+                @else
+                  <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil"></i>Criar Post</a>
+                @endif
+              </li>
+            @endcan
           </ul>
         </li>
-
+      @can('view', new App\User)
         <li class="treeview {{ setActiveRoute(['admin.users.index', 'admin.users.create']) }}">
           <a href="#"><i class="fa fa-users"></i> <span>Usuários</span>
             <span class="pull-right-container">
@@ -37,4 +39,17 @@
             </li>
           </ul>
         </li>
+      @else
+        <li class="{{ setActiveRoute(['admin.users.edit']) }}">
+          <a href="{{route('admin.users.edit', auth()->user())}}"><i class="fa fa-user"></i> <span>Perfil</span></a>
+        </li>
+      @endcan
+        @can('view', new \Spatie\Permission\Models\Role)
+
+        @endcan
+        @can('view', new \Spatie\Permission\Models\Permission)
+          <li class="{{ setActiveRoute(['admin.permissions.index', 'admin.permissions.edit']) }}">
+            <a href="{{route('admin.permissions.index')}}"><i class="fa fa-pencil"></i> <span>Permissões</span></a>
+          </li>
+        @endcan
     </ul>

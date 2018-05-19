@@ -44,7 +44,8 @@ Route::group([
         // Route::delete('posts/{post}', 'PostsController@destroy')->name('admin.posts.destroy');
 
         Route::resource('users', 'UsersController', ['as'=>'admin']);
-        Route::resource('roles', 'RolesController', ['as'=>'admin']);
+        Route::resource('roles', 'RolesController', ['except'=>'show', 'as'=>'admin']);
+        Route::resource('permissions', 'PermissionsController', ['only'=>['index', 'edit', 'update'], 'as'=>'admin']);
         Route::middleware('role:Admin')
             ->put('users/{user}/roles', 'UsersRolesController@update')
             ->name('admin.users.roles.update');
