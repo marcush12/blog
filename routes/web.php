@@ -17,7 +17,8 @@
 // });
 
 
-Route::get('/', 'PagesController@home')->name('pages.home');
+//Route::get('/', 'PagesController@home')->name('pages.home');//substituído pelo q está abaixo
+Route::get('/', 'PagesController@spa')->name('pages.home');
 Route::get('about', 'PagesController@about')->name('pages.about');
 Route::get('archive', 'PagesController@archive')->name('pages.archive');
 Route::get('contact', 'PagesController@contact')->name('pages.contact');

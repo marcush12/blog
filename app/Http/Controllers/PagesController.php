@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
+    public function spa()
+    {
+        return view('pages.spa');
+    }
+
     public function home()
     {
         // $posts = Post::whereNotNull('published_at')//exceto os com data nula
