@@ -9,9 +9,13 @@ class TagsController extends Controller
 {
     public function show(Tag $tag)
     {
+        $posts = $tag->posts()->published()->paginate();
+        if (request()->wantsJson()) {
+            return $posts;
+        }
         return view('pages.home', [
             'title'=>"Posts com a tag {$tag->name}",//apenas {} pq estamos no php
-            'posts'=> $tag->posts()->published()->paginate(1)
+            'posts'=> $posts
         ]);
     }
 }

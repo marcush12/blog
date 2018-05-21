@@ -2,31 +2,9 @@ require('./bootstrap');
 
 import Vue from 'vue';
 
-import Router from 'vue-router';
-
-Vue.use(Router);
-let router = new Router({
-    routes: [
-        {
-            path: '/',
-            component: require('./views/Home')//endereço da Home.vue a partir daqui; somente Home sem ext .vue
-        },
-        {
-            path: '/about',
-            component: require('./views/About')
-        },
-        {
-            path: '/archive',
-            component: require('./views/Archive')
-        },
-        {
-            path: '/contact',
-            component: require('./views/Contact')
-        }
-    ],
-    linkExactActiveClass: 'active'//,//já temos esta classe e vamos aplicá-la a classe do router-link
-    //linkExactClass: 'active-route',
-});
+import router from './routes';//arquivo routes.js criado; n precisa da ext .js; routes define as rotas
+Vue.component('post-header', require('./components/PostHeader.vue'));
+Vue.component('nav-bar', require('./components/NavBar.vue'));
 
 const app = new Vue({
     el: '#app',

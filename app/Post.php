@@ -15,6 +15,7 @@ class Post extends Model
         'title', 'body', 'iframe', 'excerpt', 'published_at', 'category_id', 'user_id'
     ];
     protected $dates = ['published_at'];
+    protected $appends = ['published_date'];//criar função assessor getPublishedDate
 
     public function getRouteKeyName()//route by the name of the post
     {
@@ -90,6 +91,10 @@ class Post extends Model
             return Tag::find($tag) ? $tag : Tag::create(['name'=>$tag])->id;
         });
         return $this->tags()->sync($tagIds);
+    }
+    public function getPublishedDateAttribute()//assessor: camel case; ultima palavra Attribute
+    {
+        return optional($this->published_at)->format('M d');
     }
     public static function create(array $attributes = [])
     {

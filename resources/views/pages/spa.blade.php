@@ -21,33 +21,7 @@
         <header class="space-inter">
             <div class="container container-flex space-between">
                 <figure class="logo"><img src="/img/logo.png" alt=""></figure>
-                <nav class="custom-wrapper" id="menu">
-                    <div class="pure-menu">
-                        <a href="#" class='custom-toggle btn-bar' id='toggle'></a>
-                    </div>
-                    <ul class="container-flex list-unstyled">
-                        <li class="pure-menu-item">
-                            <router-link to="/" class="pure-menu-link c-gris-2 text-uppercase">
-                                Início
-                            </router-link>
-                        </li>
-                        <li class="pure-menu-item">
-                            <router-link to="/about" class="pure-menu-link c-gris-2 text-uppercase">
-                                Sobre Nós
-                            </router-link>
-                        </li>
-                        <li class="pure-menu-item">
-                            <router-link to="/archive" class="pure-menu-link c-gris-2 text-uppercase">
-                                Arquivos
-                            </router-link>
-                        </li>
-                        <li class="pure-menu-item">
-                            <router-link to="/contact" class="pure-menu-link c-gris-2 text-uppercase">
-                                Contato
-                            </router-link>
-                        </li>
-                    </ul>
-                </nav>
+                <nav-bar></nav-bar>
             </div>
         </header>
         <router-view></router-view>

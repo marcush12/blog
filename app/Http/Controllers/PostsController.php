@@ -11,6 +11,10 @@ class PostsController extends Controller
     {
         //$post = Post::findOrFail($id);//binding Post $post; we dont need the line anymore
         if ($post->isPublished() || auth()->check()) {
+            $post->load('owner', 'category', 'tags', 'photos');
+            if (request()->wantsJson()) {//se for chamada de ajax
+                return $post;
+            }
             return view('posts.show', compact('post'));
         }
         abort('404');
