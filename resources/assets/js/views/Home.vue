@@ -1,5 +1,5 @@
 <template>
-    <post-list :posts></post-list>
+    <posts-list :posts="posts"></posts-list>
 </template>
 <script>
     export default{

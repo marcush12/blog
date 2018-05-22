@@ -41,21 +41,22 @@ class PagesController extends Controller
     {
         //\DB::statement("SET lc_time_names = 'pt_BR'");//mudar meses para português;foi mandado p AppServiceProvider.boot
 
-
-        $archive = Post::selectRaw('year(published_at)  year')//as year = alias
+        $data = [
+            'authors'=>User::latest()->take(4)->get(),
+            'categories'=>Category::take(7)->get(),
+            'posts'=>Post::latest('published_at')->take(5)->get(),
+            'archive'=>Post::selectRaw('year(published_at)  year')//as year = alias
                         ->selectRaw('month(published_at)  month')
                         ->selectRaw('monthname(published_at)  monthname')
                         ->selectRaw('count(*) posts')
                         ->groupBy('year', 'month', 'monthname')
                         //->orderBy('published_at')//deu erro mas funcionou sem isso!
-                        ->get();//Raw para year ou month
-        //$archive = Post::byYearAndMonth()->get();//scope
-        return view('pages.archive', [
-            'authors'=>User::latest()->take(4)->get(),
-            'categories'=>Category::take(7)->get(),
-            'posts'=>Post::latest('published_at')->take(5)->get(),
-            'archive'=>$archive
-        ]);
+                        ->get()//Raw para year ou month
+        ];
+        if (request()->wantsJson()) {
+            return $data;
+        }
+        return view('pages.archive', $data);
     }
     public function contact()
     {

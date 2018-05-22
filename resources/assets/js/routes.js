@@ -38,8 +38,9 @@ export default new Router({
         },
         {
             path: '/etiquetas/:tag',
-            name: 'tags_posts',
-            component: require('./views/TagsPosts')
+            name: 'tags_post',
+            component: require('./views/TagsPosts'),
+            props: true
         },
         {
             path: '*',//deixar esta rota p o final; é para aquelas q não têm os nome acima
