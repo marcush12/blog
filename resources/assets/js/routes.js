@@ -49,6 +49,7 @@ export default new Router({
     ],
     linkExactActiveClass: 'active',//,//já temos esta classe e vamos aplicá-la a classe do router-link
     //linkExactClass: 'active-route',
+    mode:'history',
     scrollBehavior(){
         return {x:0, y:0};
     }
