@@ -47,6 +47,9 @@ export default new Router({
             component: require('./views/404')
         }
     ],
-    linkExactActiveClass: 'active'//,//já temos esta classe e vamos aplicá-la a classe do router-link
+    linkExactActiveClass: 'active',//,//já temos esta classe e vamos aplicá-la a classe do router-link
     //linkExactClass: 'active-route',
+    scrollBehavior(){
+        return {x:0, y:0};
+    }
 });

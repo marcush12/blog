@@ -5,14 +5,14 @@
         @endif-->
             <!-- v-for é um loop foreach para vue: -->
             <posts-list-item
-                v-for="post in posts"
+                v-for="post in items"
                 :post="post"
                 :key="post.id">
 
             </posts-list-item>
 
         <!-- @empty -->
-            <article class="post" v-if="! posts.length">
+            <article class="post" v-if="! items.length">
                 <div class="content-post">
                     <h1>Nenhum post publicado aqui.</h1>
                 </div>
@@ -23,6 +23,6 @@
 </template>
 <script>
     export default {
-        props: ['posts']
+        props: ['items']
     }
 </script>

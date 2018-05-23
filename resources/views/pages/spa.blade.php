@@ -14,6 +14,9 @@
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
     @stack('styles')
+    <style>
+
+    </style>
 </head>
 <body>
     <div id="app">
@@ -24,7 +27,9 @@
                 <nav-bar></nav-bar>
             </div>
         </header>
-        <router-view></router-view>
+        <transition name="slide-fade">
+            <router-view></router-view>
+        </transition>
         <section class="footer">
                 <footer>
                     <div class="container">
